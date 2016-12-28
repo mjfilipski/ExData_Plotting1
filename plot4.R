@@ -8,6 +8,9 @@ library(dplyr)
 
 # Download, unzip, and load the data into R: 
 fileUrl <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+if (!file.exists("data")) {
+  dir.create("data")
+}
 download.file(fileUrl, destfile = "data/hh_power.zip")
 unzip("data/hh_power.zip", exdir = "data")
 hhdata_mini <- read.table("data/household_power_consumption.txt", header=TRUE, sep=";", nrows=1000, na.strings ="?")
@@ -44,5 +47,5 @@ with(hhdata, {
 with(hhdata, plot(datetime, Global_reactive_power,type="l",  xlab="datetime"))
 
 # export to png
-dev.copy(png, file="myplots/Plot4.png",  width = 480, height = 480)
+dev.copy(png, file="Plot4.png",  width = 480, height = 480)
 dev.off()
